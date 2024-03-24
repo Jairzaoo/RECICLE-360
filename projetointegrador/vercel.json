@@ -1,13 +1,25 @@
 {
+
     "builds": [{
-        "src": "vercel_app/wsgi.py",
-        "use": "@ardnt/vercel-python-wsgi",
-        "config": { "maxLambdaSize": "15mb" }
+
+        "src": "projetointegrador/wsgi.py",
+
+        "use": "@vercel/python",
+
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+
     }],
+
     "routes": [
+
         {
+
             "src": "/(.*)",
+
             "dest": "projetointegrador/wsgi.py"
+
         }
+
     ]
+
 }
