@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from recicle360 import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('solicitacao/', views.solicitacao, name='solicitacao'),
+    path('quemsomos/', views.quemsomos, name='quemsomos'),
+    
+    
 ]
