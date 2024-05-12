@@ -1,28 +1,38 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import recolhe, ServicosAbertos  # Import ServicosAbertos model
+from .models import recolhe, ServicosAbertos, Solicitacao  # Import models module
 
 def index(request):
     return render(request, 'index.html')
 
 def solicitacao(request):
-    nome = models.CharField(max_length=75)
-    endereco = models.CharField(max_length=100)
-    telefone = models.CharField(max_length=10)
-    email = models.EmailField()
-    data_solicitacao = models.DateField()
-    descricao = models.CharField(max_length=255)
-    status = models.CharField(max_length=50, default='Aberta')
+    if request.method == 'POST':
+        # Retrieve form data
+        nome = request.POST.get('nome')
+        endereco = request.POST.get('endereco')
+        telefone = request.POST.get('telefone')
+        email = request.POST.get('email')
+        data_solicitacao = request.POST.get('data_solicitacao')
+        descricao = request.POST.get('descricao')
+
+        # Create a new instance of `Solicitacao`
+        solicitacao = Solicitacao(
+            nome=nome,
+            endereco=endereco,
+            telefone=telefone,
+            email=email,
+            data_solicitacao=data_solicitacao,
+            descricao=descricao,
+            status="Aberta"  # Optional default value
+        )
+        solicitacao.save()  # Save the instance to the database
+
+        # Redirect to a success page or render a success message
+        return render(request, 'envia.html')  # Success template
+    
     return render(request, 'solicitacao.html')
 
 def solicitacoes(request):
-    nome = models.CharField(max_length=75)
-    endereco = models.CharField(max_length=100)
-    telefone = models.CharField(max_length=10)
-    email = models.EmailField()
-    data_solicitacao = models.DateField()
-    descricao = models.CharField(max_length=255)
-    status = models.CharField(max_length=50, default='Aberta')
     solicitacoes = recolhe.objects.all()
     context = {
         'solicitacoes': solicitacoes
@@ -33,38 +43,10 @@ def quemsomos(request):
     return render(request, 'quemsomos.html')
 
 def envia(request):
-    if request.method == 'POST':
-        # Retrieve form data
-        nome = request.POST.get('nome')
-        endereco = request.POST.get('endereco')
-        telefone = request.POST.get('telefone')
-        email = request.POST.get('email')
-        data_solicitacao = request.POST.get('data_solicitacao')
-        descricao = request.POST.get('descricao')
-
-        # Create a new instance of `recolhe`
-        solicitacao = recolhe(
-            nome=nome,
-            endereco=endereco,
-            telefone=telefone,
-            email=email,
-            data_solicitacao=data_solicitacao,
-            descricao=descricao,
-            status="Pending"  # Optional default value
-        )
-        solicitacao.save()  # Save the instance to the database
-
-        # Redirect to a success page or render a success message
-        return render(request, 'envia.html')  # Success template
-    
     return HttpResponse("Invalid request method", status=405)
 
 def abertas(request):
-    solicitacao = models.ForeignKey(Solicitacao, on_delete=models.CASCADE)
-    nome = models.CharField(max_length=50)
-    contato = models.CharField(max_length=12)
-    status_execucao = models.CharField(max_length=50, default='Em Andamento')
-    encerrado = models.BooleanField(default=False)
+    solicitacoes_abertas = ServicosAbertos.objects.all()
     context = {'solicitacoes_abertas': solicitacoes_abertas}
     return render(request, 'abertas.html', context)
 
