@@ -16,7 +16,7 @@
     <h1 class="text-center font-weight-bold">VEJA SOLICITAÇÕES EM ABERTO</h1>
     <p class="text-center font-weight-normal">Escolha e Clique em Atribuir Solicitação</p>
 
-    <form id="deleteForm" action="/excluir/" method="POST">
+    <form id="deleteForm" action="/exclui/" method="POST">
         {% csrf_token %}
         <input type="hidden" id="idToDelete" name="id">
     </form>
