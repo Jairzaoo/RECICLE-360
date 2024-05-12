@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import recolhe  # Ensure it's importing from models, not elsewhere
+from .models import recolhe,ServicosAbertos  # Ensure it's importing from models, not elsewhere
 import base64
 
 def index(request):
