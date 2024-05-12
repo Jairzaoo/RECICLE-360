@@ -27,6 +27,7 @@ urlpatterns = [
     path('abertas/', views.abertas, name='abertas'),
     path('encerra/', views.encerra, name='encerra'),
     path('atribui/', views.atribui, name='atribui'),
+    path('excluir/', views.excluir, name='excluir'),
     
     
 ]
