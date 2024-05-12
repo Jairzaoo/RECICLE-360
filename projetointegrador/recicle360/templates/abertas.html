@@ -1,4 +1,4 @@
-<!-- templates/aberto.html -->
+<!-- templates/abertas.html -->
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -17,31 +17,21 @@
         <tr>
           <th>ID</th>
           <th>Nome</th>
-          <th>Endereço</th>
-          <th>Telefone</th>
-          <th>Email</th>
-          <th>Data</th>
-          <th>Descrição</th>
-          <th>Status</th>
+          <th>Contato</th>
         </tr>
       </thead>
       <tbody>
         {% if solicitacoes_abertas %}
           {% for solicitacao in solicitacoes_abertas %}
             <tr>
-              <td>{{ solicitacao.id }}</td>
+              <td>{{ solicitacao.solicitacao_id }}</td>
               <td>{{ solicitacao.nome }}</td>
-              <td>{{ solicitacao.endereco }}</td>
-              <td>{{ solicitacao.telefone }}</td>
-              <td>{{ solicitacao.email }}</td>
-              <td>{{ solicitacao.data_solicitacao }}</td>
-              <td>{{ solicitacao.descricao }}</td>
-              <td>{{ solicitacao.status }}</td>
+              <td>{{ solicitacao.contato }}</td>
             </tr>
           {% endfor %}
         {% else %}
           <tr>
-            <td colspan="8" class="text-center">Nenhum resultado encontrado.</td>
+            <td colspan="3" class="text-center">Nenhum resultado encontrado.</td>
           </tr>
         {% endif %}
       </tbody>
@@ -61,7 +51,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="{% url 'envia' %}" method="POST">
+            <form action="{% url 'atribui' %}" method="POST">
               <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
               <div class="mb-3">
                 <label for="solicitacao_id" class="form-label">Identificador</label>
