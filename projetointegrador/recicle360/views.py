@@ -6,9 +6,23 @@ def index(request):
     return render(request, 'index.html')
 
 def solicitacao(request):
+    nome = models.CharField(max_length=75)
+    endereco = models.CharField(max_length=100)
+    telefone = models.CharField(max_length=10)
+    email = models.EmailField()
+    data_solicitacao = models.DateField()
+    descricao = models.CharField(max_length=255)
+    status = models.CharField(max_length=50, default='Aberta')
     return render(request, 'solicitacao.html')
 
 def solicitacoes(request):
+    nome = models.CharField(max_length=75)
+    endereco = models.CharField(max_length=100)
+    telefone = models.CharField(max_length=10)
+    email = models.EmailField()
+    data_solicitacao = models.DateField()
+    descricao = models.CharField(max_length=255)
+    status = models.CharField(max_length=50, default='Aberta')
     solicitacoes = recolhe.objects.all()
     context = {
         'solicitacoes': solicitacoes
@@ -46,7 +60,11 @@ def envia(request):
     return HttpResponse("Invalid request method", status=405)
 
 def abertas(request):
-    solicitacoes_abertas = recolhe.objects.filter(status_execucao='Em Andamento', encerrado=False)
+    solicitacao = models.ForeignKey(Solicitacao, on_delete=models.CASCADE)
+    nome = models.CharField(max_length=50)
+    contato = models.CharField(max_length=12)
+    status_execucao = models.CharField(max_length=50, default='Em Andamento')
+    encerrado = models.BooleanField(default=False)
     context = {'solicitacoes_abertas': solicitacoes_abertas}
     return render(request, 'abertas.html', context)
 
