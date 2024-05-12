@@ -1,0 +1,21 @@
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import ServicosAbertos  # Import your model
+
+@csrf_exempt  # This decorator allows the view to accept POST requests without CSRF token
+def encerra(request):
+    if request.method == 'POST':
+        solicitacao_id = request.POST.get('solicitacao_id')  # Get the ID from the POST data
+
+        # Update the database
+        try:
+            servico = ServicosAbertos.objects.get(solicitacao_id=solicitacao_id)
+            servico.encerrado = True
+            servico.save()
+            return JsonResponse({'success': True})  # Return a JSON response indicating success
+        except ServicosAbertos.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Solicitação não encontrada'}, status=404)
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)}, status=500)  # Return error response if any exception occurs
+
+    return JsonResponse({'error': 'Método de requisição inválido'}, status=405)  # Return error response for invalid request method

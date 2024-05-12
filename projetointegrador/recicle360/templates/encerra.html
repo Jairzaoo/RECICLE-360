@@ -87,7 +87,7 @@
                 var id = $(this).attr('data-id');
                 $.ajax({
                     type: 'POST',
-                    url: 'excluir.php', // Arquivo PHP para processar a exclusão
+                    url: 'excluir.html', // Arquivo PHP para processar a exclusão
                     data: {id: id},
                     success: function (response) {
                         console.log(response); // Exibe a resposta do servidor no console
