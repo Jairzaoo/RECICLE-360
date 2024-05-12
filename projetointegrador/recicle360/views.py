@@ -72,3 +72,6 @@ def atribui(request):
         return render(request, 'atribui.html')  # Success template
 
     return HttpResponse("Invalid request method", status=405)
+
+def encerra(request):
+    return render(request, 'encerra.html')
