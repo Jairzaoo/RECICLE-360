@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import recolhe, ServicosAbertos, Solicitacao  # Import models module
+from .models import ServicosAbertos, Solicitacao  # Import models module
 
 def index(request):
     return render(request, 'index.html')
