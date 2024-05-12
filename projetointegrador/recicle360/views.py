@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from .models import recolhe  # Ensure it's importing from models, not elsewhere
-import base64
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from .models import recolhe, ServicosAbertos  # Import ServicosAbertos model
 
 def index(request):
     return render(request, 'index.html')
@@ -8,11 +8,8 @@ def index(request):
 def solicitacao(request):
     return render(request, 'solicitacao.html')
 
-# Renamed view function to avoid conflict with the model
 def solicitacoes(request):
     solicitacoes = recolhe.objects.all()
-    
-    # Pass the records to the template
     context = {
         'solicitacoes': solicitacoes
     }
@@ -49,10 +46,9 @@ def envia(request):
     return HttpResponse("Invalid request method", status=405)
 
 def abertas(request):
-   # Ensure you're using the correct model
-   solicitacoes_abertas = recolhe.objects.filter(status_execucao='Em Andamento', encerrado=False)
-   context = {'solicitacoes_abertas': solicitacoes_abertas}
-   return render(request, 'abertas.html', context)
+    solicitacoes_abertas = recolhe.objects.filter(status_execucao='Em Andamento', encerrado=False)
+    context = {'solicitacoes_abertas': solicitacoes_abertas}
+    return render(request, 'abertas.html', context)
 
 def atribui(request):
     if request.method == 'POST':
@@ -74,4 +70,17 @@ def atribui(request):
     return HttpResponse("Invalid request method", status=405)
 
 def encerra(request):
+    if request.method == 'POST':
+        # Retrieve the ID of the service to be closed from the form data
+        solicitacao_id = request.POST.get('solicitacao_id')
+
+        # Update the service to mark it as closed
+        try:
+            service = ServicosAbertos.objects.get(solicitacao_id=solicitacao_id)
+            service.encerrado = True
+            service.save()
+            return redirect('abertas')  # Redirect to the list of open services
+        except ServicosAbertos.DoesNotExist:
+            return HttpResponse("Service not found", status=404)
+
     return render(request, 'encerra.html')
