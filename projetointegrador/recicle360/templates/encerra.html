@@ -16,6 +16,11 @@
     <h1 class="text-center font-weight-bold">VEJA SOLICITAÇÕES EM ABERTO</h1>
     <p class="text-center font-weight-normal">Escolha e Clique em Atribuir Solicitação</p>
 
+    <form id="deleteForm" action="/excluir/" method="POST">
+        {% csrf_token %}
+        <input type="hidden" id="idToDelete" name="id">
+    </form>
+
     <table class="table table-striped">
         <tr>
             <th></th>
@@ -27,7 +32,7 @@
         </tr>
         {% for row in dados %}
         <tr>
-            <td><input type='checkbox' class='form-check-input' data-toggle='modal' data-target='#modalConfirmacao' data-id='{{ row.id }}'></td>
+            <td><input type='checkbox' class='form-check-input' data-id='{{ row.id }}'></td>
             <td>{{ row.id }}</td>
             <td>{{ row.solicitacao_id }}</td>
             <td>{{ row.nome }}</td>
@@ -38,30 +43,9 @@
     </table>
 
     <br><br>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Atribuir Solicitação
+    <button type="button" class="btn btn-primary" onclick="deleteRecord()">
+        Excluir Solicitação
     </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modalConfirmacao" tabindex="-1" aria-labelledby="modalConfirmacaoLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="modalConfirmacaoLabel">Confirmar Exclusão</h1>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Tem certeza de que deseja excluir este registro?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="btnExcluir">Excluir</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <button onclick="window.location.href = '/';" class="btn btn-info">Home</button>
 
@@ -71,36 +55,21 @@
         </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <script>
-        $(document).ready(function () {
-            $('.form-check-input').change(function () {
-                $('.form-check-input').not(this).prop('checked', false);
-                var id = $(this).data('id');
-                $('#btnExcluir').attr('data-id', id);
-            });
-
-            $('#btnExcluir').click(function () {
-                var id = $(this).attr('data-id');
-                $.ajax({
-                    type: 'POST',
-                    url: 'excluir.html', // Arquivo PHP para processar a exclusão
-                    data: {id: id},
-                    success: function (response) {
-                        console.log(response); // Exibe a resposta do servidor no console
-                        // Aqui você pode adicionar lógica para atualizar a tabela após a exclusão
-                    }
+        function deleteRecord() {
+            var checkboxes = document.querySelectorAll('.form-check-input:checked');
+            if (checkboxes.length === 0) {
+                alert('Por favor, selecione pelo menos uma solicitação para excluir.');
+                return;
+            }
+            if (confirm('Tem certeza de que deseja excluir a solicitação selecionada?')) {
+                checkboxes.forEach(function(checkbox) {
+                    var id = checkbox.getAttribute('data-id');
+                    document.getElementById('idToDelete').value = id;
+                    document.getElementById('deleteForm').submit();
                 });
-                $('#modalConfirmacao').modal('hide');
-            });
-
-            $('#btnCancelar').click(function () {
-                $('.form-check-input').prop('checked', false);
-            });
-        });
+            }
+        }
     </script>
 </body>
 </html>
