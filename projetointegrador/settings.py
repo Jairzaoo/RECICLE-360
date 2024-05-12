@@ -76,11 +76,16 @@ WSGI_APPLICATION = 'projetointegrador.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {        
-        'ENGINE': 'django.db.backends.sqlite3',        
-        'NAME': BASE_DIR / 'db.sqlite3',    }   
-    
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'verceldb',  # Your database name
+        'USER': 'default',    # Your database user
+        'PASSWORD': 'R0P5fomkbZzM',  # Your database password
+        'HOST': 'ep-withered-wood-a4k8zdbu-pooler.us-east-1.aws.neon.tech',  # Your database host
+        'PORT': '5432',       # Your database port
+    }
 }
+
 
 
 
