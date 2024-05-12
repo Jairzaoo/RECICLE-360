@@ -20,7 +20,8 @@ def solicitacoes(request):
 
 def quemsomos(request):
     return render(request, 'quemsomos.html')
-
+def encerra(request):
+    return render(request, 'encerra.html')
 def envia(request):
     if request.method == 'POST':
         # Retrieve form data
