@@ -21,7 +21,9 @@ def solicitacoes(request):
 def quemsomos(request):
     return render(request, 'quemsomos.html')
 def encerra(request):
-    return render(request, 'encerra.html')
+    dados = recolhe.objects.filter(status="Pending")
+    context = {'dados': dados}
+    return render(request, 'encerra.html', context)
 def envia(request):
     if request.method == 'POST':
         # Retrieve form data
