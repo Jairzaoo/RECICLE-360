@@ -1,34 +1,3 @@
-<?php
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'recicle';
-
-// Conexão com o banco de dados
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Verifica a conexão
-if ($conn->connect_errno) {
-    die("Erro na conexão: " . $conn->connect_errno);
-}
-   
-      
-   // Captura os valores dos inputs
-    $solicitacao_id = $_POST['solicitacao_id'];
-    $nome = $_POST['nome'];
-    $contato = $_POST['contato'];
-    
-    // Query SQL para inserir os dados no banco de dados
-    $sql = "INSERT INTO recicle.servicos_abertos (solicitacao_id, nome, contato) VALUES ('$solicitacao_id', '$nome', '$contato')";
-
-    // Executa a query
-    $resultado = mysqli_query($conn, $sql);
-
-    
-
-
-$conn->close();
-?>
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -44,7 +13,7 @@ $conn->close();
 <body>
     
 <div class="alert alert-info" role="alert">
-Atribuição realizada com Sucesso! <a href="index.html" class="alert-link">Clique Aqui</a>. para retornar a pagina incial.
+Atribuição realizada com Sucesso! <a href="/" class="alert-link">Clique Aqui</a>. para retornar a pagina incial.
 </div>
   
 </body>
