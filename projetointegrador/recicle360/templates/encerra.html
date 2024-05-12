@@ -32,12 +32,11 @@
         </tr>
         {% for row in dados %}
         <tr>
-            <td><input type='checkbox' class='form-check-input' data-id='{{ row.id }}'></td>
-            <td>{{ row.id }}</td>
-            <td>{{ row.solicitacao_id }}</td>
-            <td>{{ row.nome }}</td>
-            <td>{{ row.contato }}</td>
-            <td>{{ row.status_execucao }}</td>
+            <td><input type='checkbox' class='form-check-input' data-id='{{ solicitacao.id }}'></td>            
+            <td>{{ solicitacao.solicitacao.id }}</td>
+            <td>{{ solicitacao.nome }}</td>
+            <td>{{ solicitacao.contato }}</td>
+            <td>{{ solicitacao.status }}</td>
         </tr>
         {% endfor %}
     </table>
