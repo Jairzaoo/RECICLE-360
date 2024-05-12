@@ -51,6 +51,23 @@ def envia(request):
     
     return HttpResponse("Invalid request method", status=405)
 
+def exclui(request):
+    if request.method == 'POST':
+        # Get the ID of the entry to delete from the request POST data
+        id_to_delete = request.POST.get('id')
+
+        # Retrieve the entry from the database using the ID
+        entry_to_delete = recolhe.objects.get(pk=id_to_delete)
+
+        # Delete the entry
+        entry_to_delete.delete()
+
+        # Redirect to the confirmation page
+        return render(request, 'exclui.html')
+
+    # If the request method is not POST, redirect to the home page
+    return redirect('/')
+
 def abertas(request):
    # Ensure you're using the correct model
    solicitacoes_abertas = recolhe.objects.filter(status="Pending")
