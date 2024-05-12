@@ -24,9 +24,9 @@
         {% if solicitacoes_abertas %}
           {% for solicitacao in solicitacoes_abertas %}
             <tr>
-              <td>{{ solicitacao.solicitacao_id }}</td>
+              <td>{{ solicitacao.id }}</td>
               <td>{{ solicitacao.nome }}</td>
-              <td>{{ solicitacao.contato }}</td>
+              <td>{{ solicitacao.telefone }}</td>
             </tr>
           {% endfor %}
         {% else %}
