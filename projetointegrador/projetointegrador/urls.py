@@ -25,7 +25,8 @@ urlpatterns = [
     path('recolhe/', views.solicitacoes, name='recolhe'),
     path('solicitacao/envia', views.envia, name='envia'),
     path('abertas/', views.abertas, name='abertas'),
-    #path('encerra/', views.encerra, name='encerra'),
+    path('encerra/', views.encerra, name='encerra'),
+    path('atribui/', views.atribui, name='atribui'),
     
     
 ]
