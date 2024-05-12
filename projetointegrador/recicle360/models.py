@@ -10,7 +10,7 @@ class recolhe(models.Model):
     data_solicitacao = models.DateField()        # Add data_solicitacao field
     descricao = models.TextField()               # Add descricao field
     status = models.CharField(max_length=255, default="Pending")
-
+    encerrado = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nome
@@ -19,6 +19,7 @@ class ServicosAbertos(models.Model):
     solicitacao_id = models.IntegerField()
     nome = models.CharField(max_length=255)
     contato = models.CharField(max_length=255)
+    encerrado = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nome
