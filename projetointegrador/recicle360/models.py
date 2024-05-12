@@ -4,11 +4,14 @@ from django.db import models
 
 class recolhe(models.Model):
     nome = models.CharField(max_length=255)
-    solicitacao_id = models.IntegerField()  # Assuming this is the ID of the request
-    contato = models.CharField(max_length=255)
-    status_execucao = models.CharField(max_length=255)  # Assuming this is the status field
-    encerrado = models.BooleanField(default=False)
-    
+    endereco = models.CharField(max_length=255)  # Add endereco field
+    telefone = models.CharField(max_length=15)   # Add telefone field
+    email = models.EmailField()                  # Add email field
+    data_solicitacao = models.DateField()        # Add data_solicitacao field
+    descricao = models.TextField()               # Add descricao field
+    status = models.CharField(max_length=255, default="Pending")
+
+
     def __str__(self):
         return self.nome
 
