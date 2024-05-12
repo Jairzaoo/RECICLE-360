@@ -33,9 +33,9 @@ def solicitacao(request):
     return render(request, 'solicitacao.html')
 
 def solicitacoes(request):
-    solicitacoes = recolhe.objects.all()
+    todas_solicitacoes = Solicitacao.objects.all()
     context = {
-        'solicitacoes': solicitacoes
+        'todas_solicitacoes': todas_solicitacoes
     }
     return render(request, 'recolhe.html', context)
 
