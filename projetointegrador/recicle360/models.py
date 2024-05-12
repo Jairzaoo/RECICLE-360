@@ -4,13 +4,11 @@ from django.db import models
 
 class recolhe(models.Model):
     nome = models.CharField(max_length=255)
-    endereco = models.CharField(max_length=255)
-    telefone = models.CharField(max_length=15)
-    email = models.EmailField()
-    data_solicitacao = models.DateField()
-    descricao = models.TextField()
-    status = models.CharField(max_length=255)
-
+    solicitacao_id = models.IntegerField()  # Assuming this is the ID of the request
+    contato = models.CharField(max_length=255)
+    status_execucao = models.CharField(max_length=255)  # Assuming this is the status field
+    encerrado = models.BooleanField(default=False)
+    
     def __str__(self):
         return self.nome
 

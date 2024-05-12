@@ -50,7 +50,7 @@ def envia(request):
 
 def abertas(request):
    # Ensure you're using the correct model
-   solicitacoes_abertas = recolhe.objects.filter(status='Aberta')
+   solicitacoes_abertas = recolhe.objects.filter(status_execucao='Em Andamento', encerrado=False)
    context = {'solicitacoes_abertas': solicitacoes_abertas}
    return render(request, 'abertas.html', context)
 
