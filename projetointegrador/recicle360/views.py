@@ -79,13 +79,16 @@ def abertas(request):
    return render(request, 'abertas.html', context)
 
 def atribui(request):
-    if request.method == 'POST':
+     if request.method == 'POST':
         solicitacao_id = request.POST.get('solicitacao_id')
         nome = request.POST.get('nome')
         contato = request.POST.get('contato')
 
         # Retrieve the corresponding request
-        solicitacao = recolhe.objects.get(pk=solicitacao_id)
+        try:
+            solicitacao = recolhe.objects.get(pk=solicitacao_id)
+        except recolhe.DoesNotExist:
+            return HttpResponse("Solicitação não encontrada", status=404)
 
         # Update the status to "Em Andamento"
         solicitacao.status = "Em Andamento"
@@ -97,9 +100,9 @@ def atribui(request):
             nome=nome,
             contato=contato,
         )
-        servico.save()  # Save the record to the database
+        servico.save()
 
-        # Redirect to a success page or render a success message
-        return render(request, 'atribui.html')  # Success template
+        return render(request, 'atribui.html')
 
-    return HttpResponse("Invalid request method", status=405)
+    
+        return HttpResponse("Invalid request method", status=500)
