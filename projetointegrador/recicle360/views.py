@@ -97,12 +97,12 @@ def atribui(request):
         solicitacao.save()
 
         servico = ServicosAbertos(
-            id_recolhe=solicitacao_id,
-            recolhe_nome=nome,
-            recolhe_contato=contato,
+            solicitacao_id=solicitacao_id,
+            nome=nome,
+            contato=contato,
         )
         servico.save()
 
-        return render(request, 'atribui.html')
+        return render(request,'atribui.html')
 
     return HttpResponse("Invalid request method", status=500)
