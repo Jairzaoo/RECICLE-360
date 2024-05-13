@@ -80,13 +80,13 @@ def abertas(request):
 
 def atribui(request):
      if request.method == 'POST':
-        solicitacao_id = request.POST.get('solicitacao_id')
+        solicitacao_id = request.POST.get('solicitacao.id')
         nome = request.POST.get('nome')
         contato = request.POST.get('contato')
 
         # Retrieve the corresponding request
         try:
-            solicitacao = recolhe.objects.get(pk=solicitacao_id)
+            solicitacao = recolhe.objects.get(pk=solicitacao.id)
         except recolhe.DoesNotExist:
             return HttpResponse("Solicitação não encontrada", status=404)
 
