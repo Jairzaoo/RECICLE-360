@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from .models import recolhe,ServicosAbertos  
+from django.http import HttpResponse
+from .models import recolhe,ServicosAbertos 
+
 import base64
 
 def index(request):
@@ -20,10 +22,12 @@ def solicitacoes(request):
 
 def quemsomos(request):
     return render(request, 'quemsomos.html')
+
 def encerra(request):
     dados = recolhe.objects.filter(status="Pendente")
     context = {'dados': dados}
     return render(request, 'encerra.html', context)
+
 def envia(request):
     if request.method == 'POST':
         # Retrieve form data
