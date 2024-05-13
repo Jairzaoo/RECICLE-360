@@ -24,8 +24,13 @@ def quemsomos(request):
     return render(request, 'quemsomos.html')
 
 def encerra(request):
-    dados = recolhe.objects.filter(status="Pendente")
-    context = {'dados': dados}
+    dados_pendentes = recolhe.objects.filter(status="Pendente")
+    dados_em_andamento = recolhe.objects.filter(status="Em Andamento")
+    
+    context = {
+        'dados_pendentes': dados_pendentes,
+        'dados_em_andamento': dados_em_andamento,
+    }
     return render(request, 'encerra.html', context)
 
 def envia(request):
