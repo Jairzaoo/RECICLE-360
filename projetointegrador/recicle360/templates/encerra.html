@@ -29,13 +29,14 @@
             <th>CONTATO RECOLHEDOR</th>
             <th>STATUS EXECUÇÃO</th>
         </tr>
-        {% for row in dados %}
+        {% if solicitacoes_abertas %}
+          {% for solicitacao in solicitacoes_abertas %}
         <tr>
-            <td><input type='checkbox' class='form-check-input' data-id='{{ row.id }}'></td>            
-            <td>{{ row.id }}</td>
-            <td>{{ row.nome }}</td>
-            <td>{{ row.contato }}</td>
-            <td>{{ row.status }}</td>
+            <td><input type='checkbox' class='form-check-input' data-id='{{ solicitacao.id }}'></td>            
+            <td>{{ solicitacao.id }}</td>
+              <td>{{ solicitacao.nome }}</td>
+              <td>{{ solicitacao.telefone }}</td>
+              <td>{{ solicitacao.status }}</td>
         </tr>
         {% endfor %}
     </table>
