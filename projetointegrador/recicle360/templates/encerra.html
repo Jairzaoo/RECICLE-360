@@ -39,6 +39,12 @@
               <td>{{ solicitacao.status }}</td>
         </tr>
         {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="3" class="text-center">Nenhum resultado encontrado.</td>
+          </tr>
+        {% endif %}
+
     </table>
 
     <br><br>
