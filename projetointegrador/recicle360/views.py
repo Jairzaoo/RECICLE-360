@@ -85,8 +85,8 @@ def abertas(request):
 def atribui(request):
     if request.method == 'POST':
         solicitacao_id = request.POST.get('solicitacao_id')
-        recolhe_nome = request.POST.get('nome')
-        recolhe_contato = request.POST.get('contato')
+        nome = request.POST.get('nome')
+        contato = request.POST.get('contato')
 
         try:
             solicitacao = recolhe.objects.get(pk=solicitacao_id)
@@ -97,9 +97,9 @@ def atribui(request):
         solicitacao.save()
 
         servico = ServicosAbertos(
-            solicitacao_id=solicitacao_id,
-            nome=nome,
-            contato=contato,
+            id_recolhe=solicitacao_id,
+            recolhe_nome=nome,
+            recolhe_contato=contato,
         )
         servico.save()
 
