@@ -33,8 +33,10 @@
         <tr>
             <td><input type='checkbox' class='form-check-input' data-id='{{solicitacao.id}}'></td>            
             
-            <td>{{ solicitacao.nome }}</td>
-            <td>{{ solicitacao.telefone }}</td>
+            <td>{{ solicitacao.id }}</td>
+            <td>{{ solicitacao.id_recolhe }}</td>
+            <td>{{ solicitacao.recolhe_nome }}</td>
+            <td>{{ solicitacao.recolhe_contato }}</td>
             <td>{{ solicitacao.status }}</td>
         </tr>
         {% endfor %}

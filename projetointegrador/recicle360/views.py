@@ -85,8 +85,8 @@ def abertas(request):
 def atribui(request):
     if request.method == 'POST':
         solicitacao_id = request.POST.get('solicitacao_id')
-        nome = request.POST.get('nome')
-        contato = request.POST.get('contato')
+        recolhe_nome = request.POST.get('nome')
+        recolhe_contato = request.POST.get('contato')
 
         try:
             solicitacao = recolhe.objects.get(pk=solicitacao_id)
