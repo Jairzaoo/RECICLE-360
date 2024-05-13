@@ -84,6 +84,13 @@ def atribui(request):
         nome = request.POST.get('nome')
         contato = request.POST.get('contato')
 
+        # Retrieve the corresponding request
+        solicitacao = recolhe.objects.get(pk=solicitacao_id)
+
+        # Update the status to "Em Andamento"
+        solicitacao.status = "Em Andamento"
+        solicitacao.save()
+
         # Create a new record
         servico = ServicosAbertos(
             solicitacao_id=solicitacao_id,
