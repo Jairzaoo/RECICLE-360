@@ -21,7 +21,7 @@ def solicitacoes(request):
 def quemsomos(request):
     return render(request, 'quemsomos.html')
 def encerra(request):
-    dados = recolhe.objects.filter(status="Pendente")
+    dados = recolhe.objects.filter(status="Pending")
     context = {'dados': dados}
     return render(request, 'encerra.html', context)
 def envia(request):
@@ -42,7 +42,7 @@ def envia(request):
             email=email,
             data_solicitacao=data_solicitacao,
             descricao=descricao,
-            status="Pendente"  # Optional default value
+            status="Pending"  # Optional default value
         )
         solicitacao.save()  # Save the instance to the database
 
@@ -70,7 +70,7 @@ def exclui(request):
 
 def abertas(request):
    # Ensure you're using the correct model
-   solicitacoes_abertas = recolhe.objects.filter(status="Pendente")
+   solicitacoes_abertas = recolhe.objects.filter(status="Pending")
    context = {'solicitacoes_abertas': solicitacoes_abertas}
    return render(request, 'abertas.html', context)
 
